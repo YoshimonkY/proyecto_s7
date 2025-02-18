@@ -12,7 +12,7 @@ df = pd.read_csv('vehicles_us.csv')  # cargar dataset
 
 # -------------------------------------------------------------------------------
 st.write('Crea un histograma de modelos')
-histograma = st.button('Generar')  # crear un botón
+histograma = st.checkbox('Generar')  # crear un botón
 
 if histograma:  # al hacer clic en el botón
 
