@@ -9,10 +9,12 @@ st.header('Descubre las caracteristicas de los vehiculos!')     # encabezado
 
 
 df = pd.read_csv('vehicles_us.csv')  # cargar dataset
-st.write('Crea un histograma de modelos')
-hist_button = st.button('Generar')  # crear un botón
 
-if hist_button:  # al hacer clic en el botón
+# -------------------------------------------------------------------------------
+st.write('Crea un histograma de modelos')
+histograma = st.button('Generar')  # crear un botón
+
+if histograma:  # al hacer clic en el botón
 
     # mensaje
     st.write('Selecciona un rango en el cuadro para amplificar datos')
@@ -20,15 +22,20 @@ if hist_button:  # al hacer clic en el botón
     fig = px.histogram(df, x="model_year")  # crear un histograma
 
     st.plotly_chart(fig, use_container_width=True)  # mostrar gráfico
+# --------------------------------------------------------------------------------
+# crea un boton para un grafico de dispersion
+g_dispersion = st.button('Mostrar gráfico de dispersión')
 
-build_histogram = st.checkbox(
-    'Construir un histograma de precios')  # casilla de verificación
+# Al hacer click:
+if g_dispersion:
 
-if build_histogram:  # casilla seleccionada:
-    st.write('Selecciona un rango para amplificar datos')
-    fig = px.histogram(df, x='price')
-    st.plotly_chart(fig, use_container_width=True)
-# ------------------------------------------------------------------------
+    # Write the message
+    st.write(
+        'Generaste un grafico de dispersión para el odómetro y el precio. Selecciona un rango para ampliar')
+    fig2 = px.scatter(df, x='odometer', y='price')    # Create scatter plot
+    st.plotly_chart(fig2, use_container_width=True)     # Show a Scatter plot
+
+# ---------------------------------------------------------------------------------
 # Encabezado precios
 st.header("Filtro de precios")
 
@@ -50,7 +57,7 @@ fig = px.bar(filtered_df, x="model_year", y="price", title="Filtered Data")
 st.plotly_chart(fig)
 
 
-# ---------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 bar_button = st.button('Genera un ploteo de Barras')
 
 # Al hacer click en boton
